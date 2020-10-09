@@ -5,10 +5,10 @@ import debounce from "lodash/debounce";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import { addSearchResults } from "../redux/actions/searchActions";
-const Search = ({
+
+const SearchBar = ({
   classes,
   onAddSearchResults,
-  onGetLatestSearchResults,
   pageNumber,
 }) => {
   const debounceHandleSearch = React.useCallback(
@@ -17,9 +17,11 @@ const Search = ({
   );
 
   function handleSearch(value) {
-    onAddSearchResults({ string: value, pageNumber });
+    if (value.length) {
+      onAddSearchResults({ string: value, pageNumber });
+      
+    }
   }
-  //   handleSearch = debounce(handleSearch, 1500);
   return (
     <InputBase
       placeholder="Search…"
@@ -47,4 +49,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default compose(connect(mapStateToProps, mapDispatchToProps))(Search);
+export default compose(connect(mapStateToProps, mapDispatchToProps))(SearchBar);

@@ -18,22 +18,10 @@ export default (state = initialState, action) => {
         infoMessage: "STARTED searching",
       };
     case CONST.ADD_SEARCH_RESULTS_SUCCESS:
-      const {
-        page,
-        results,
-        total_pages,
-        total_results,
-        currentSearch,
-      } = action.payload;
       return {
         ...state,
         infoMessage: "results obtained",
-        page,
-        results,
-        total_pages,
-        total_results,
-        currentSearch,
-        // results: [...state.results.concat(results)],
+        ...action.payload,
       };
     case CONST.ADD_SEARCH_RESULTS_FAIL:
       return {

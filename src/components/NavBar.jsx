@@ -7,7 +7,7 @@ import Typography from "@material-ui/core/Typography";
 import { fade, makeStyles } from "@material-ui/core/styles";
 import MenuIcon from "@material-ui/icons/Menu";
 import SwipeableDrawer from "./SwipeableDrawer";
-import Search from "./Search";
+import Search from "./SearchBar";
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,

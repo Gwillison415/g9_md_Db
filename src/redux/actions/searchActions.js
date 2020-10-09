@@ -76,7 +76,7 @@ export const addSearchResults = ({ string, pageNumber }) => {
       .catch((error) => {
         dispatch({
           type: CONST.ADD_SEARCH_RESULTS_FAIL,
-          payload: "THINGS",
+          payload: "error time",
         });
         alert(error);
       });

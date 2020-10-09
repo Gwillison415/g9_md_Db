@@ -61,7 +61,7 @@ useEffect( () => {
    async function fetchData() {
      const response = await axiosInstance.get(`/movie/${id}/images`);
      // never did get any images back but the plan would be to destructure the properties and use them
-     // for CardMedia aspectratio file_path width hieght
+     // for CardMedia aspect ratio file_path width hieght
    }
   fetchData();
 
@@ -75,7 +75,7 @@ useEffect( () => {
             <CardMedia
               className={classes.cover}
               image={image}
-              title="Live from space album cover"
+              title="Live from space, the movie"
             />
           )}
         </div>
