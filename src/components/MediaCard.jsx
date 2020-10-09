@@ -1,14 +1,13 @@
-import React, {useEffect} from "react";
+import React, { useEffect, useState } from "react";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
-import SkipPreviousIcon from "@material-ui/icons/SkipPrevious";
-import PlayArrowIcon from "@material-ui/icons/PlayArrow";
-import SkipNextIcon from "@material-ui/icons/SkipNext";
+import Rating from "./Rating";
 import moment from "moment";
+import { axiosInstance } from "../utils/api";
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
@@ -57,15 +56,19 @@ export default function MediaCard({
 }) {
   const classes = useStyles();
   const theme = useTheme();
+  const [image, setImage] = useState(null)
   const year = moment(release_date, 'YYYY-MM-DD').format('YYYY') 
-// useEffect(() => {
-//   effect
-//   return () => {
-//     cleanup
-//   }
-// }, [input])
+useEffect( () => {
+   async function fetchData() {
+
+    const response = await axiosInstance.get(`/movie/${id}/images`);;
+    console.log('response.data', response.data)
+  }
+  fetchData();
+
+}, [id])
 console.log('year', year)
-const image = backdrop_path? backdrop_path: poster_path
+// const image = backdrop_path? backdrop_path: poster_path
 console.log('image', image)
   return (
     <div className={classes.container}>
@@ -84,13 +87,22 @@ console.log('image', image)
             <Typography className={classes.root} component="h5" variant="h5">
               {original_title}
             </Typography>
-            <Typography className={classes.root} variant="caption" color="textSecondary">
+            <Typography
+              className={classes.root}
+              variant="caption"
+              color="textSecondary"
+            >
               {year}
             </Typography>
-            <Typography className={classes.root} variant="subtitle2" color="textSecondary">
-              Mac Miller
+            <Typography
+              className={classes.root}
+              variant="subtitle2"
+              color="textSecondary"
+            >
+              {overview}{" "}
             </Typography>
           </CardContent>
+          <Rating voteCount={vote_count} voteAverage={vote_average}></Rating>
           <div className={classes.controls}></div>
         </div>
       </Card>
