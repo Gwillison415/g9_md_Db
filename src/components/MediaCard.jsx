@@ -60,16 +60,13 @@ export default function MediaCard({
 useEffect( () => {
    async function fetchData() {
      const response = await axiosInstance.get(`/movie/${id}/images`);
-     // console.log('response.data', response.data)
      // never did get any images back but the plan would be to destructure the properties and use them
      // for CardMedia aspectratio file_path width hieght
    }
   fetchData();
 
 }, [id])
-console.log('year', year)
 // const image = backdrop_path? backdrop_path: poster_path
-console.log('image', image)
   return (
     <div className={classes.container}>
       <Card className={classes.root}>

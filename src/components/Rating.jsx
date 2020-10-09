@@ -12,9 +12,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 export default function SimpleRating({ voteAverage, voteCount }) {
   const classes = useStyles();
-  console.log(" voteAverage",  voteAverage);
   const rating = voteAverage / 2;
-  console.log("rating", rating);
   return (
     <div className={classes.root}>
       <Box component="fieldset" mb={3} borderColor="transparent">

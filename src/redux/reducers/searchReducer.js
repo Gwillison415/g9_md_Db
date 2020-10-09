@@ -47,12 +47,13 @@ export default (state = initialState, action) => {
         infoMessage: "CONTINUED searching",
       };
     case CONST.AUGMENT_SEARCH_RESULTS_SUCCESS:
-      const { results: newResults, ...restOfPayload } = action.payload;
+      const newResults = action.payload.results;
+      const newPage = action.payload.page;
       return {
         ...state,
         infoMessage: "results obtained",
-        ...restOfPayload,
-        results: [...state.results.concat(results)],
+        page: newPage,
+        results: [...state.results.concat(newResults)],
       };
     case CONST.AUGMENT_SEARCH_RESULTS_FAIL:
       return {

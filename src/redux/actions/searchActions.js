@@ -19,7 +19,12 @@ export const augmentSearchResults = ({ string, pageNumber }) => {
       method: "get",
       // url: "/search/movie?=" + "&query=" + string + "&page=1",
 
-      url: "/search/movie?" + "&query=" + string + "&page=" + pageNumber + 1,
+      url:
+        "/search/movie?" +
+        "&query=" +
+        string +
+        "&page=" +
+        (Number(pageNumber) + 1),
     })
       .then((res) => {
         const { page, results, total_pages, total_results } = res.data;
