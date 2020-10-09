@@ -35,7 +35,6 @@ export default function SwipeableTempDrawer({ toggleDrawer, drawerState }) {
       <List>
         {["About", "Search"].map((text, index) => {
            text = text.toLowerCase();
-           console.log('text', text)
           return (
           <ListItem button key={text}>
             <Link to={`/${text}`}>

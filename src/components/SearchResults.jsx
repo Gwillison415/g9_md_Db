@@ -1,7 +1,7 @@
 import React from 'react'
 import MediaCard from "./MediaCard";
 import { connect } from "react-redux";
-import IconButton from "@material-ui/core/IconButton";
+import Button from "@material-ui/core/Button";
 import AddAPhotoIcon from "@material-ui/icons/AddAPhoto";
 import {
   addSearchResults,
@@ -17,7 +17,6 @@ const useStyles = makeStyles((theme) => ({
   menuButton: {
     marginRight: theme.spacing(2),
     maxWidth: 300,
-    backgroundColor:'white'
   }
 }))
 
@@ -28,7 +27,6 @@ export  function SearchResults({
   const classes = useStyles();
 
   const getMoreMovieResults =  () => {
-    console.log("getMO, page", page);
     if (page <= total_pages) {
       onAugmentSearchResults({ string: currentSearch, pageNumber: page });
     }
@@ -38,16 +36,17 @@ export  function SearchResults({
       {results.map((cardProps, idx) => {
         return <MediaCard key={idx} {...cardProps}></MediaCard>;
       })}
-      <IconButton
-        onClick={getMoreMovieResults}
-        edge="start"
-        className={classes.menuButton}
-        color="inherit"
-        aria-label="open drawer"
-      >
-        <AddAPhotoIcon />
-        grab more movies
-      </IconButton>
+      {page > 0 && (
+        <Button
+          variant="contained"
+          color="secondary"
+          className={classes.menuButton}
+          startIcon={<AddAPhotoIcon />}
+          onClick={getMoreMovieResults}
+        >
+          Add more movies
+        </Button>
+      )}
     </>
   );
 }
