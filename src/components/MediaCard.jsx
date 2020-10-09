@@ -3,7 +3,6 @@ import { makeStyles, useTheme } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
-import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import Rating from "./Rating";
 import moment from "moment";
@@ -60,10 +59,11 @@ export default function MediaCard({
   const year = moment(release_date, 'YYYY-MM-DD').format('YYYY') 
 useEffect( () => {
    async function fetchData() {
-
-    const response = await axiosInstance.get(`/movie/${id}/images`);;
-    console.log('response.data', response.data)
-  }
+     const response = await axiosInstance.get(`/movie/${id}/images`);
+     // console.log('response.data', response.data)
+     // never did get any images back but the plan would be to destructure the properties and use them
+     // for CardMedia aspectratio file_path width hieght
+   }
   fetchData();
 
 }, [id])

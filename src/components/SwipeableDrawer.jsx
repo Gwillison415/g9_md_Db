@@ -9,6 +9,7 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import InboxIcon from "@material-ui/icons/MoveToInbox";
 import MailIcon from "@material-ui/icons/Mail";
+import { BrowserRouter as Router, Link } from "react-router-dom";
 
 const useStyles = makeStyles({
   list: {
@@ -22,8 +23,6 @@ const useStyles = makeStyles({
 export default function SwipeableTempDrawer({ toggleDrawer, drawerState }) {
   const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent);
   const classes = useStyles();
-  console.log("typeof toggleDrawer drawer", typeof toggleDrawer);
-
   const list = (anchor) => (
     <div
       className={clsx(classes.list, {
@@ -34,34 +33,41 @@ export default function SwipeableTempDrawer({ toggleDrawer, drawerState }) {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-        {["About", "Search Results"].map((text, index) => (
+        {["About", "Search"].map((text, index) => {
+           text = text.toLowerCase();
+           console.log('text', text)
+          return (
           <ListItem button key={text}>
-            <ListItemIcon>
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-            </ListItemIcon>
-            <ListItemText primary={text} />
+            <Link to={`/${text}`}>
+              <ListItemIcon>
+                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+              </ListItemIcon>
+              <ListItemText primary={text} />
+            </Link>
           </ListItem>
-        ))}
+        )})}
       </List>
     </div>
   );
 
   return (
     <div>
-      {["top"].map((anchor) => (
-        <React.Fragment key={anchor}>
-          <SwipeableDrawer
-            disableBackdropTransition={!iOS}
-            disableDiscovery={iOS}
-            anchor={anchor}
-            open={drawerState[anchor]}
-            onClose={toggleDrawer(anchor, false)}
-            onOpen={toggleDrawer(anchor, true)}
-          >
-            {list(anchor)}
-          </SwipeableDrawer>
-        </React.Fragment>
-      ))}
+      {/* <Router> */}
+        {["top"].map((anchor) => (
+          <React.Fragment key={anchor}>
+            <SwipeableDrawer
+              disableBackdropTransition={!iOS}
+              disableDiscovery={iOS}
+              anchor={anchor}
+              open={drawerState[anchor]}
+              onClose={toggleDrawer(anchor, false)}
+              onOpen={toggleDrawer(anchor, true)}
+            >
+              {list(anchor)}
+            </SwipeableDrawer>
+          </React.Fragment>
+        ))}
+      {/* </Router> */}
     </div>
   );
 }

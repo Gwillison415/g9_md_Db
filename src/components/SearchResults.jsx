@@ -1,6 +1,70 @@
 import React from 'react'
 import MediaCard from "./MediaCard";
 import { connect } from "react-redux";
+import IconButton from "@material-ui/core/IconButton";
+import AddAPhotoIcon from "@material-ui/icons/AddAPhoto";
+import {
+  addSearchResults,
+  augmentSearchResults,
+} from "../redux/actions/searchActions";
+
+import { fade, makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+  },
+  menuButton: {
+    marginRight: theme.spacing(2),
+    maxWidth: 300,
+    backgroundColor:'white'
+  }
+}))
+
+export  function SearchResults({
+  onAugmentSearchResults,
+  search: { results, total_pages, page, currentSearch },
+}) {
+  const classes = useStyles();
+
+  const getMoreMovieResults =  () => {
+    console.log("getMO, page", page);
+    if (page <= total_pages) {
+      onAugmentSearchResults({ string: currentSearch, pageNumber: page });
+    }
+  }
+  return (
+    <>
+      {results.map((cardProps, idx) => {
+        return <MediaCard key={idx} {...cardProps}></MediaCard>;
+      })}
+      <IconButton
+        onClick={getMoreMovieResults}
+        edge="start"
+        className={classes.menuButton}
+        color="inherit"
+        aria-label="open drawer"
+      >
+        <AddAPhotoIcon />
+        grab more movies
+      </IconButton>
+    </>
+  );
+}
+
+const mapStateToProps = (state) => ({
+    search:state.search
+});
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onAugmentSearchResults: (payload) => {
+      dispatch(augmentSearchResults(payload));
+    },
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(SearchResults);
+
 // {adult: false;
 // backdrop_path: null;
 // genre_ids: (2)[(16, 35)];
@@ -31,20 +95,3 @@ import { connect } from "react-redux";
 // video: false;
 // vote_average: 0;
 // vote_count: 0;}
-export  function SearchResults({results}) {
-    return (
-        <>
-            {results.map((cardProps,idx) =>{
-               return <MediaCard key={idx} {...cardProps}></MediaCard>;
-            })}
-        </>
-    )
-}
-
-const mapStateToProps = (state) => ({
-    results:state.search.results
-});
-
-const mapDispatchToProps = {};
-
-export default connect(mapStateToProps, mapDispatchToProps)(SearchResults);

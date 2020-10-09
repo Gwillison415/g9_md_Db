@@ -11,7 +11,12 @@ import {
 //   getLatestSearchResults,
 
 // } from "../redux/sagaHelpers";
-const Search = ({ classes, onAddSearchResults, onGetLatestSearchResults }) => {
+const Search = ({
+  classes,
+  onAddSearchResults,
+  onGetLatestSearchResults,
+  pageNumber,
+}) => {
   const debounceHandleSearch = React.useCallback(
     debounce(handleSearch, 1000),
     []
@@ -22,8 +27,8 @@ const Search = ({ classes, onAddSearchResults, onGetLatestSearchResults }) => {
     //   target: { value },
     // } = event;
     // console.log("handleSearch value", value);
-    onAddSearchResults(value);
-  };
+    onAddSearchResults({string:value, pageNumber});
+  }
   //   handleSearch = debounce(handleSearch, 1500);
   return (
     <InputBase
@@ -40,7 +45,7 @@ const Search = ({ classes, onAddSearchResults, onGetLatestSearchResults }) => {
 
 const mapStateToProps = (state) => {
   return {
-state
+pageNumber:state.search.page
   };
 };
 
