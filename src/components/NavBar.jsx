@@ -7,6 +7,7 @@ import Typography from "@material-ui/core/Typography";
 import { fade, makeStyles } from "@material-ui/core/styles";
 import MenuIcon from "@material-ui/icons/Menu";
 import SwipeableDrawer from "./SwipeableDrawer";
+import Search from "./Search";
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -100,7 +101,7 @@ export default function SearchAppBar() {
             <div className={classes.searchIcon}>
               <SearchIcon />
             </div>
-            <SearchBarDebounced classes={classes}></SearchBarDebounced>
+            <Search classes={classes}></Search>
           </div>{" "}
         </Toolbar>
         <SwipeableDrawer
