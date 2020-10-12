@@ -20,15 +20,19 @@ I leaned on Redux as a global state container so that I  could A) drive props on
 
 Debouncing results was a challenge for me. I strongly considered redux-saga for debouncing the search bar that Displays visual results as the user types. After hooking it up However, in the end I couldn't justify it's overhead / 'wetwear cost' when compared with ```React.useCallback + lodash/debounce``` to create ```debounceHandleSearch``` in just a few lines. I might make different decisions on a larger app where more was going on, but I always need to consider KISS if possible and make it more straightforward on other developers. All that being said, I am still using thunks..
 
-I felt I needed react-router-dom to fulfill the legal requirements of the API I was accessing - you'll see the license adhered to on the /about page.
+I felt I needed react-router-dom to fulfill the legal requirements of the API I was accessing - you'll see the license adhered to on the `/about` page.
 
 axios has a lot of safegaurds built right in, so I used an instance of axios to demonstrate best practices: separation of concerns / code organization / DRY patterns
 
-Speaking of DRY - I separated components where they made logical sense to do so.. 
+Speaking of DRY - I separated components where they made logical sense to do so by considering other consumer use cases and their data structures. 
 
-I have connected components, 'dumb' components, hooks, effects, curried functions. 1 thing I was sad about not getting from the api was photo assets - i'm guessing that costs $$ the```MediaCard``` component should be able to load and then fetch the photo, to give the user the feeling of more things & faster
+I have connected components, 'dumb' components, hooks, effects, curried functions. 1 thing I was sad about not getting from the api was photo assets - i'm guessing that costs $$. My ```MediaCard``` component should be able to load and then fetch the photo, to give the user the feeling of more speed and responsiveness. 
+
+
+
+### If I had more time
 
 Speaking of more things and faster - What I would continue to do - to improve this app would be tests, ```<Suspense> & <Lazy>``` components for infinite scroll and a little cache to remember recent searchs and serve those right back to the user. 
-
-
-### `yarn test`
+For tests I would work to understand which tests would add the most value beyond core features tests, and begin there. 
+I would implement a 2 column stackable layout, such it would allow more items on larger screens.
+I would spend time styling icons and playing with the application to understand if it conveyed the message I was trying to send. 
